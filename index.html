@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Important Question! 💖</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #ffe6f2;
+    }
+    h1, h2 {
+      color: #ff4081;
+    }
+    .button {
+      font-size: 20px;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    #okay {
+      background-color: #ff4081;
+      color: white;
+    }
+    /* Other buttons */
+    #proceed, #sorry, #yes, #no, #goBack, #extraStep {
+      background-color: #ff4081;
+      color: white;
+      display: none;
+    }
+    #no {
+      background-color: #aaa;
+      margin-left: 20px;
+    }
+    #yes:hover, #sorry:hover, #goBack:hover, #extraStep:hover {
+      transform: scale(1.1);
+    }
+    /* Sections initially hidden */
+    #question,
+    #final,
+    #blocked,
+    #valentine,
+    #regretMessage,
+    #funExtraStep,
+    #fineMessage,
+    #thankYouPage {
+      display: none;
+    }
+    /* Final message page styling */
+    #finalMessage {
+      display: none;
+      font-size: 1.5em;
+      color: #ff4081;
+      margin-top: 20px;
+    }
+    /* Fade transitions */
+    .fade {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+    /* Container for the blocked image and bubble */
+    .image-container {
+      position: relative;
+      display: inline-block;
+    }
+    .text-bubble {
+      position: absolute;
+      top: 100px;
+      left: 20%;
+      background: white;
+      color: #ff4081;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    /* Valentine images container */
+    .valentine-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <!-- Front Page -->
+  <h1 id="intro" class="fade">soooo... I have a question for you! </h1>
+  <img
+    id="introImage"
+    class="fade"
+    src="https://i.pinimg.com/474x/79/1b/3a/791b3a33b2ce3320ca1817310ad9ae58.jpg"
+    alt="Front Page Image"
+    width="300"
+  />
+  <button id="okay" class="button fade" onclick="nextStep()">okay!</button>
+
+  <!-- Question Page -->
+  <div id="question" class="fade">
+    <h2>would you rather...</h2>
+    <button class="button" onclick="chooseOption('rich')">be really rich and have no girl ever </button>
+    <button class="button" onclick="chooseOption('middle')">be middle class and have one girl </button>
+    <button class="button" onclick="chooseOption('player')">get all the play I want 😏</button>
+  </div>
+
+  <!-- Blocked Page -->
+  <div id="blocked" class="fade">
+    <h2>that's it. I'm not asking what I was actually gonna ask anymore. </h2>
+    <div class="image-container">
+      <div class="text-bubble">Mhm</div>
+      <img src="https://i.pinimg.com/736x/ae/93/3d/ae933d2f9539fd611dbb81045baa5866.jpg" alt="Blocked" width="300" />
+    </div>
+    <br>
+    <button id="sorry" class="button" onclick="extraFunStep()">waitttt, I'm sorry! </button>
+  </div>
+
+  <!-- Regret Message Page -->
+  <div id="regretMessage" class="fade">
+    <h2>I know you wanted to pick the other option 😠 just pick it...</h2>
+    <img src="https://i.pinimg.com/474x/7f/e6/09/7fe6091606cd6eb958312d74155b3984.jpg" alt="Regret Option" width="300" />
+    <br>
+    <button id="goBack" class="button" onclick="goBack()">fine I'll pick it 🙄</button>
+  </div>
+
+  <!-- Trust Issue Page -->
+  <div id="funExtraStep" class="fade">
+    <h2>hmmm I don't know if I can trust you now </h2>
+    <p>convince me why I should still ask my real question...</p>
+    <img src="https://i.pinimg.com/originals/db/5b/0e/db5b0e8a0bb6321d7f9936dffe19089d.jpg" alt="Trust Issue" width="300" />
+    <br>
+    <button id="extraStep" class="button" onclick="askValentine()">because you love me? :) </button>
+  </div>
+
+  <!-- Fineeee... Page with Image -->
+  <div id="fineMessage" class="fade">
+    <h2>fineeee you're right...</h2>
+    <img 
+      src="https://i.pinimg.com/736x/65/63/85/6563851aebc7a52628d6fa612fbdc341.jpg" 
+      alt="Fineeee Image" 
+      width="300"
+    />
+  </div>
+
+  <!-- Valentine Page -->
+  <div id="valentine" class="fade">
+    <h1>Will you be my valentine?💕</h1>
+    <div class="valentine-images">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcio1v4vcCRkxNEOJXO-WYii3ZvU8jEfOWYqpa9npjyx2j21mfDhRhj-t4LpkANFQJeVc&usqp=CAU" alt="Dog Image" width="300" />
+    </div>
+    <br />
+    <button id="yes" class="button" onclick="sayYes()">Yes! </button>
+    <button id="no" class="button" onmouseover="moveButton()">No 😢</button>
+  </div>
+
+  <!-- Final Message Page with Final Image (only text and final image) -->
+  <div id="finalMessage" class="fade">
+    <p>yayyyy!!! I'm so happy you said yes! </p>
+    <img 
+      id="finalImage" 
+      src="https://i.pinimg.com/736x/80/b7/e2/80b7e23918d1ce91b741e0a2816c3ae6.jpg" 
+      alt="Final Celebration Image" 
+      width="300" 
+    />
+  </div>
+
+  <!-- Thank You Page -->
+  <div id="thankYouPage" class="fade">
+    <h1>thank you for being my boyfriend❤️</h1>
+    <p>You make me so happy :).</p>
+    <img src="https://i.pinimg.com/originals/42/9a/89/429a890a39e70d522d52c7e52bce8535.gif" alt="Celebration" width="300" />
+  </div>
+
+  <script>
+    // Global counter for the "No" button
+    var noButtonCount = 0;
+
+    // Fade functions with 0.3s transition
+    function fadeOut(element, callback) {
+      element.style.transition = "opacity 0.3s";
+      element.style.opacity = 0;
+      setTimeout(function() {
+        element.style.display = "none";
+        if (callback) callback();
+      }, 300);
+    }
+
+    function fadeIn(element, callback) {
+      if (element.tagName && element.tagName.toLowerCase() === "button") {
+        element.style.display = "inline-block";
+      } else {
+        element.style.display = "block";
+      }
+      element.style.opacity = 0;
+      element.style.transition = "opacity 0.3s";
+      setTimeout(function() {
+        element.style.opacity = 1;
+        if (callback) callback();
+      }, 10);
+    }
+
+    function nextStep() {
+      // Fade out the intro text, image, and button
+      fadeOut(document.getElementById("intro"));
+      fadeOut(document.getElementById("introImage"));
+      fadeOut(document.getElementById("okay"));
+      setTimeout(() => {
+        fadeIn(document.getElementById("question"));
+      }, 300);
+    }
+
+    function chooseOption(option) {
+      fadeOut(document.getElementById("question"));
+      setTimeout(() => {
+        if (option === "player") {
+          fadeIn(document.getElementById("blocked"));
+          fadeIn(document.getElementById("sorry"));
+        } else {
+          fadeIn(document.getElementById("regretMessage"));
+          fadeIn(document.getElementById("goBack"));
+        }
+      }, 300);
+    }
+
+    function goBack() {
+      fadeOut(document.getElementById("regretMessage"));
+      fadeOut(document.getElementById("goBack"));
+      setTimeout(() => {
+        fadeIn(document.getElementById("question"));
+      }, 300);
+    }
+
+    function extraFunStep() {
+      fadeOut(document.getElementById("blocked"));
+      fadeOut(document.getElementById("sorry"));
+      setTimeout(() => {
+        fadeIn(document.getElementById("funExtraStep"));
+        fadeIn(document.getElementById("extraStep"));
+      }, 300);
+    }
+
+    function askValentine() {
+      fadeOut(document.getElementById("funExtraStep"));
+      fadeOut(document.getElementById("extraStep"));
+      setTimeout(() => {
+        // Show "Fineeee..." message for 2 seconds
+        fadeIn(document.getElementById("fineMessage"));
+        setTimeout(() => {
+          fadeOut(document.getElementById("fineMessage"));
+          setTimeout(() => {
+            fadeIn(document.getElementById("valentine"));
+            fadeIn(document.getElementById("yes"));
+            fadeIn(document.getElementById("no"));
+          }, 300);
+        }, 2000);
+      }, 300);
+    }
+
+    function sayYes() {
+      fadeOut(document.getElementById("valentine"));
+      fadeOut(document.getElementById("yes"));
+      fadeOut(document.getElementById("no"));
+      setTimeout(() => {
+        // Fade in the final message and trigger confetti
+        fadeIn(document.getElementById("finalMessage"), function() {
+          // Trigger confetti burst
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        });
+        // Extended delay before transitioning to the Thank You page (3000ms)
+        setTimeout(() => {
+          fadeOut(document.getElementById("finalMessage"));
+          setTimeout(() => {
+            fadeIn(document.getElementById("thankYouPage"));
+          }, 300);
+        }, 3000);
+      }, 300);
+    }
+
+    function moveButton() {
+      noButtonCount++;
+      const noButton = document.getElementById("no");
+      // Change text based on count: after 5 hovers, change text to "i stg adrian",
+      // and after 10 hovers, change text to "i will block you"
+      if (noButtonCount >= 10) {
+        noButton.innerText = "i will block you";
+      } else if (noButtonCount >= 5) {
+        noButton.innerText = "i stg adrian";
+      } else {
+        noButton.innerText = "oops! wrong answer! try again 😆";
+      }
+      noButton.style.position = "absolute";
+      let x = Math.random() * (window.innerWidth - 100);
+      let y = Math.random() * (window.innerHeight - 50);
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    }
+  </script>
+  <!-- Include canvas-confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</body>
+</html>
+
